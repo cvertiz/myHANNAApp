@@ -23,7 +23,8 @@
     "start": "cds run",
     "deploy": "cds deploy --to hana:MyHANNAApp-dev",
     "app": "npm start --prefix app",
-    "watch-interactions_items": "cds watch --open interactions_items/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-interactions_items": "cds watch --open interactions_items/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-iteractions-items": "cds watch --open iteractions-items/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "cds": {
     "requires": {

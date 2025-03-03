@@ -1,2 +1,3 @@
 
-using from './interactions_items/annotations';
+
+using from './iteractions-items/annotations';
