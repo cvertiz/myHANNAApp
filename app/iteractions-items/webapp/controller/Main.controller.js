@@ -31,7 +31,21 @@ sap.ui.define([
                 }
                 oBinding.filter(aFilters);
             }
+        },
+
+        onSortItem: function () {
+            var oTable = this.getView().byId("itemsTable"); // Referencia a la tabla
+            var oBinding = oTable.getBinding("items"); // Obtiene el binding de la tabla
+
+            if (oBinding) {
+                var bDescending = this._bSortDescending || false; // Alternar entre ascendente y descendente
+                var oSorter = new Sorter("date", bDescending);
+                oBinding.sort(oSorter);
+
+                this._bSortDescending = !bDescending; // Invertir el orden para la siguiente vez
+            }
         }
+
 
     });
 });
