@@ -27,3 +27,10 @@ entity Items : cuid {
     price       : Price;
     currency    : Currency;
 };
+
+entity Products : cuid, managed {
+    name       : String(255);
+    created_at : DateTime;
+    price      : Decimal(10, 2);
+    currency   : String(3);
+}
