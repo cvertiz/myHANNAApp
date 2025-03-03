@@ -7,13 +7,28 @@
           "apiEndpoint": "https://api.cf.us10-001.hana.ondemand.com",
           "org": "5b762db2trial",
           "space": "dev",
-          "instance": "MyHANNAApp-dev",
-          "key": "MyHANNAApp-dev-key",
+          "instance": "MyHANAApp-dev",
+          "key": "MyHANAApp-dev-key",
           "resolved": false
         },
         "kind": "hana",
         "vcap": {
           "name": "db"
+        }
+      },
+      "auth": {
+        "binding": {
+          "type": "cf",
+          "apiEndpoint": "https://api.cf.us10-001.hana.ondemand.com",
+          "org": "5b762db2trial",
+          "space": "dev",
+          "instance": "MyHANAApp-auth",
+          "key": "default",
+          "resolved": false
+        },
+        "kind": "xsuaa-auth",
+        "vcap": {
+          "name": "auth"
         }
       }
     }

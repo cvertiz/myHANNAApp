@@ -11,6 +11,7 @@
     "@sap/cds-common-content": "^2.1.0",
     "@sap/hana-client": "^2.23.27",
     "@sap/hdi-deploy": "^5.3.2",
+    "@sap/xssec": "^4",
     "express": "^4"
   },
   "devDependencies": {
@@ -20,7 +21,9 @@
   },
   "scripts": {
     "start": "cds run",
-    "deploy": "cds deploy --to hana:MyHANNAApp-dev"
+    "deploy": "cds deploy --to hana:MyHANNAApp-dev",
+    "app": "npm start --prefix app",
+    "watch-interactions_items": "cds watch --open interactions_items/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "cds": {
     "requires": {
@@ -30,5 +33,8 @@
     "sql": {
       "native_hana_associations": false
     }
-  }
+  },
+  "sapux": [
+    "app/interactions_items"
+  ]
 }
