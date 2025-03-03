@@ -1,0 +1,13 @@
+COLUMN TABLE CatalogService_Interactions_Items_drafts (
+  ID NVARCHAR(36) NOT NULL,
+  interaction_ID NVARCHAR(36) NULL,
+  "TEXT" NVARCHAR(1024) NULL,
+  "DATE" SECONDDATE NULL,
+  price DECIMAL(10, 2) NULL,
+  currency_code NVARCHAR(3) NULL,
+  IsActiveEntity BOOLEAN,
+  HasActiveEntity BOOLEAN,
+  HasDraftEntity BOOLEAN,
+  DraftAdministrativeData_DraftUUID NVARCHAR(36) NOT NULL,
+  PRIMARY KEY(ID)
+)

@@ -1,0 +1,5 @@
+VIEW CatalogService_Interactions_Items_texts AS SELECT
+  texts_0.locale,
+  texts_0.ID,
+  texts_0."TEXT"
+FROM app_interactions_Items_texts AS texts_0

@@ -1,0 +1,9 @@
+VIEW CatalogService_HeaderView AS SELECT
+  Headers_0.ID,
+  Headers_0.createdAt,
+  Headers_0.createdBy,
+  Headers_0.modifiedAt,
+  Headers_0.modifiedBy,
+  Headers_0.partner,
+  Headers_0.country_code
+FROM app_interactions_Headers AS Headers_0

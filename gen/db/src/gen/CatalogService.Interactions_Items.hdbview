@@ -1,0 +1,8 @@
+VIEW CatalogService_Interactions_Items AS SELECT
+  Items_0.ID,
+  Items_0.interaction_ID,
+  Items_0."TEXT",
+  Items_0."DATE",
+  Items_0.price,
+  Items_0.currency_code
+FROM app_interactions_Items AS Items_0

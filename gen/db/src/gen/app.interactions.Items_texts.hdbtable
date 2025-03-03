@@ -1,0 +1,6 @@
+COLUMN TABLE app_interactions_Items_texts (
+  locale NVARCHAR(14) NOT NULL,
+  ID NVARCHAR(36) NOT NULL,
+  "TEXT" NVARCHAR(1024),
+  PRIMARY KEY(locale, ID)
+)

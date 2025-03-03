@@ -1,0 +1,9 @@
+COLUMN TABLE app_interactions_Items (
+  ID NVARCHAR(36) NOT NULL,
+  interaction_ID NVARCHAR(36),
+  "TEXT" NVARCHAR(1024),
+  "DATE" SECONDDATE,
+  price DECIMAL(10, 2),
+  currency_code NVARCHAR(3),
+  PRIMARY KEY(ID)
+)

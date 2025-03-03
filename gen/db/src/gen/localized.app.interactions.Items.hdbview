@@ -1,0 +1,8 @@
+VIEW localized_app_interactions_Items AS SELECT
+  L_0.ID,
+  L_0.interaction_ID,
+  coalesce(localized_1."TEXT", L_0."TEXT") AS "TEXT",
+  L_0."DATE",
+  L_0.price,
+  L_0.currency_code
+FROM (app_interactions_Items AS L_0 LEFT JOIN app_interactions_Items_texts AS localized_1 ON localized_1.ID = L_0.ID AND localized_1.locale = SESSION_CONTEXT('LOCALE'))

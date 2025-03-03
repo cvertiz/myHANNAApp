@@ -1,0 +1,10 @@
+COLUMN TABLE app_interactions_Headers (
+  ID NVARCHAR(36) NOT NULL,
+  createdAt TIMESTAMP,
+  createdBy NVARCHAR(255),
+  modifiedAt TIMESTAMP,
+  modifiedBy NVARCHAR(255),
+  partner NVARCHAR(10),
+  country_code NVARCHAR(3),
+  PRIMARY KEY(ID)
+)
