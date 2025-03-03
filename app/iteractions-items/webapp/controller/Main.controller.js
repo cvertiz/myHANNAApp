@@ -27,7 +27,7 @@ sap.ui.define([
             if (oBinding) {
                 var aFilters = [];
                 if (sQuery) {
-                    aFilters.push(new Filter("text", FilterOperator.Contains, sQuery));
+                    aFilters.push(new Filter("name", FilterOperator.Contains, sQuery));
                 }
                 oBinding.filter(aFilters);
             }
@@ -39,7 +39,7 @@ sap.ui.define([
 
             if (oBinding) {
                 var bDescending = this._bSortDescending || false; // Alternar entre ascendente y descendente
-                var oSorter = new Sorter("date", bDescending);
+                var oSorter = new Sorter("created_at ", bDescending);
                 oBinding.sort(oSorter);
 
                 this._bSortDescending = !bDescending; // Invertir el orden para la siguiente vez
