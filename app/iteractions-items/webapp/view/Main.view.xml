@@ -50,7 +50,7 @@
                 id="itemsTable"
                 growing="true"
                 growingThreshold="10"
-                items="{ path:'/Interactions_Items', parameters:{$count:true} }"
+                items="{ path:'/interactions_Products', parameters:{$count:true} }"
                 mode="SingleSelectLeft"
             >
                 <headerToolbar>
@@ -82,10 +82,10 @@
 
                 <columns>
                     <Column>
-                        <Text text="Interaction ID" />
+                        <Text text="ID" />
                     </Column>
                     <Column>
-                        <Text text="Text" />
+                        <Text text="Name" />
                     </Column>
                     <Column>
                         <Text text="Date" />
@@ -99,11 +99,11 @@
                     <ColumnListItem>
                         <cells>
                             <Text text="{ID}" />
-                            <Text text="{text}" />
-                            <Text text="{date}" />
+                            <Text text="{name}" />
+                            <Text text="{created_at}" />
                             <ObjectNumber
                                 number="{price}"
-                                unit="{currency_code}"
+                                unit="{currency}"
                             />
                         </cells>
                     </ColumnListItem>
