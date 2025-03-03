@@ -3,6 +3,7 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
     xmlns:layout="sap.ui.layout"
     height="100%"
 >
@@ -15,119 +16,34 @@
             </f:DynamicPageTitle>
         </f:title>
 
-        <!-- DynamicPage Header -->
         <f:header>
             <f:DynamicPageHeader pinnable="true">
-                <!-- <mdc:FilterBar
-                    id="filterbar"
-                    delegate="{
-							name: 'mdc/sample/delegate/JSONFilterBarDelegate',
-							payload: {
-								valueHelp: {
-									name: 'NameValueHelp',
-									range: 'RangeValueHelp'
-								}
-							}
-						}"
-                    p13nMode="Item,Value"
+                <fb:FilterBar
+                    showRestoreButton="false"
+                    useToolbar="false"
+                    showFilterConfiguration="false"
+                    showGoOnFB="false"
                 >
-                    <mdc:basicSearchField>
-                        <mdc:FilterField
-                            delegate="{name: 'sap/ui/mdc/field/FieldBaseDelegate'}"
-                            dataType="sap.ui.model.type.String"
-                            placeholder="Search Mountains"
-                            conditions="{$filters>/conditions/$search}"
-                            propertyKey="$search"
-                            maxConditions="1"
-                        />
-                    </mdc:basicSearchField>
-
-                    <mdc:filterItems>
-                        <mdc:FilterField
-                            label="Name"
-                            propertyKey="name"
-                            dataType="sap.ui.model.type.String"
-                            conditions="{$filters>/conditions/name}"
-                            valueHelp="name-vh"
-                            delegate="{name: 'sap/ui/mdc/field/FieldBaseDelegate'}"
-                        />
-                    </mdc:filterItems>
-                    <mdc:dependents>
-                        <core:Fragment
-                            fragmentName="mdc.sample.view.fragment.NameValueHelp"
-                            type="XML"
-                        />
-                    </mdc:dependents>
-                </mdc:FilterBar> -->
+                    <fb:filterGroupItems>
+                        <fb:FilterGroupItem
+                            name="interactions"
+                            groupName="filters"
+                            label="items"
+                            visibleInFilterBar="true"
+                        >
+                            <fb:control>
+                                <Input
+                                    id="searchField"
+                                    placeholder="Search"
+                                    liveChange="onSearch"
+                                />
+                            </fb:control>
+                        </fb:FilterGroupItem>
+                    </fb:filterGroupItems>
+                </fb:FilterBar>
             </f:DynamicPageHeader>
         </f:header>
-        <!-- <f:content>
-            <Table
-                id="idHeadersTable"
-                sticky="HeaderToolbar,ColumnHeaders"
-                inset="false"
-                items="{
-							path: '/HeaderCollection',
-							sorter: {
-								path: 'Name'
-							}
-						}"
-                class="sapFDynamicPageAlignContent"
-                width="auto"
-            >
-                <headerToolbar>
-                    <Toolbar>
-                        <Title
-                            text="Headers"
-                            level="H2"
-                        />
-                    </Toolbar>
-                </headerToolbar>
-                <columns>
-                    <Column width="12em">
-                        <Text text="Header" />
-                    </Column>
-                    <Column
-                        minScreenWidth="Tablet"
-                        demandPopin="true"
-                    >
-                        <Text text="Supplier" />
-                    </Column>
-                    <Column
-                        minScreenWidth="Tablet"
-                        demandPopin="true"
-                        hAlign="End"
-                    >
-                        <Text text="Dimensions" />
-                    </Column>
-                    <Column hAlign="End">
-                        <Text text="Price" />
-                    </Column>
-                </columns>
-                <items>
-                    <ColumnListItem>
-                        <cells>
-                            <ObjectIdentifier
-                                title="{Name}"
-                                text="{HeaderId}"
-                            />
-                            <Text text="{SupplierName}" />
-                            <Text
-                                text="{Width} x {Depth} x {Height} {DimUnit}"
-                            />
-                            <ObjectNumber
-                                number="{
-											parts:[{path:'Price'},{path:'CurrencyCode'}],
-											type: 'sap.ui.model.type.Currency',
-											formatOptions: {showMeasure: false}
-										}"
-                                unit="{CurrencyCode}"
-                            />
-                        </cells>
-                    </ColumnListItem>
-                </items>
-            </Table>
-        </f:content> -->
+        
 
         <f:content>
             <Table
