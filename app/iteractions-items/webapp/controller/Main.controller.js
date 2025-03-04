@@ -48,7 +48,7 @@ sap.ui.define([
 
         onAddItem: function () {
             if (!this._oDialog) {
-                this._oDialog = this.getView().byId("addProductDialog");
+                this._oDialog = this.getView().byId("productDialog");
             }
             this._oDialog.open();
         },
@@ -66,6 +66,17 @@ sap.ui.define([
 
             var that = this;
 
+            var oInputName = this.getView().byId("inputName");
+            var oInputPrice = this.getView().byId("inputPrice");
+            var oInputCurrency = this.getView().byId("inputCurrency");
+
+            var fnClearForm = function () {
+                oInputName.setValue(""); // Limpiar campo nombre
+                oInputPrice.setValue(""); // Limpiar campo precio
+                oInputCurrency.setValue(""); // Limpiar campo moneda
+                that._sProductId = null; // Resetear ID para evitar ediciones no deseadas
+            };
+
             if (this._sProductId) {
                 // EDITAR PRODUCTO: Llamar al procedimiento `UpdateProduct`
                 var oContext = oModel.bindContext("/UpdateProduct(...)");
@@ -80,6 +91,7 @@ sap.ui.define([
                     oModel.refresh();
                     that._sProductId = null; // Resetear ID
                     that.getView().byId("productDialog").close();
+                    fnClearForm();
                 }).catch(function (oError) {
                     MessageBox.error("Error al actualizar: " + oError.message);
                 });
@@ -96,6 +108,7 @@ sap.ui.define([
                     MessageToast.show("Producto agregado correctamente");
                     oModel.refresh();
                     that.getView().byId("productDialog").close();
+                    fnClearForm();
                 }).catch(function (oError) {
                     MessageBox.error("Error al agregar: " + oError.message);
                 });
@@ -158,6 +171,7 @@ sap.ui.define([
                     if (oAction === sap.m.MessageBox.Action.OK) {
                         oContext.execute().then(function () {
                             MessageToast.show("Producto eliminado correctamente");
+                            oBindingContext.refresh()
                             oTable.removeSelections(true);
                         }).catch(function (oError) {
                             MessageBox.error("Error al eliminar: " + oError.message);
