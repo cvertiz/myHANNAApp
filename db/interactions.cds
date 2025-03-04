@@ -33,4 +33,5 @@ entity Products : cuid, managed {
     created_at : DateTime;
     price      : Decimal(10, 2);
     currency   : String(3);
+    status: Integer default 1;
 }

@@ -67,7 +67,6 @@
                                 text="Delete"
                                 press="onDeleteItem"
                                 type="Negative"
-                                enabled="false"
                             />
                             <Button
                                 icon="sap-icon://sort"
@@ -95,10 +94,6 @@
                     <Column>
                         <Text text="Edit" />
                     </Column>
-
-                    <Column>
-                        <Text text="Delete" />
-                    </Column>
                 </columns>
 
                 <items>
@@ -115,11 +110,6 @@
                                 icon="sap-icon://edit"
                                 press="onEditItem"
                                 type="Transparent"
-                            />
-                            <Button
-                                icon="sap-icon://delete"
-                                press="onDeleteItem"
-                                type="Negative"
                             />
                         </cells>
                     </ColumnListItem>

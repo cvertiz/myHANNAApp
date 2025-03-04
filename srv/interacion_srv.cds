@@ -22,11 +22,10 @@ service CatalogService {
     entity HeaderView            as projection on interactions.Headers;
 
     entity interactions_Products as projection on interactions.Products;
-
-
     //SP
-    function InsertProduct(p_name : String, p_price : Decimal(10, 2), p_currency : String) returns String;
+    function InsertProduct(p_name : String, p_price : Decimal(10, 2), p_currency : String)              returns String;
     function UpdateProduct(p_id : UUID, p_name : String, p_price : Decimal(10, 2), p_currency : String) returns String;
+    function DeleteProduct(p_id : UUID)                                                                 returns String;
 
 
 }

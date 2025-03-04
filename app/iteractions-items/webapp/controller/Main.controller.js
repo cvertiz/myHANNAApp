@@ -127,6 +127,44 @@ sap.ui.define([
         onCloseDialog: function () {
             this.getView().byId("productDialog").close();
             this._sProductId = null; // Resetear ID para la próxima vez
+        },
+        onDeleteItem: function () {
+            var oTable = this.getView().byId("itemsTable");
+            var oSelectedItem = oTable.getSelectedItem();
+
+            if (!oSelectedItem) {
+                sap.m.MessageToast.show("Please select an item to delete.");
+                return;
+            }
+
+            var oBindingContext = oSelectedItem.getBindingContext();
+            var sPath = oBindingContext.getPath();
+            var oModel = this.getView().getModel();
+
+            if (!(oModel instanceof sap.ui.model.odata.v4.ODataModel)) {
+                console.error("Error: El modelo no es un OData V4.");
+                return;
+            }
+
+            // Extraer el ID del producto
+            var productID = oBindingContext.getObject().ID;
+            console.log("productID: " + productID)
+            var oContext = oModel.bindContext("/DeleteProduct(...)");
+
+            oContext.setParameter("p_id", productID);
+
+            sap.m.MessageBox.confirm("Are you sure you want to delete this product?", {
+                onClose: function (oAction) {
+                    if (oAction === sap.m.MessageBox.Action.OK) {
+                        oContext.execute().then(function () {
+                            MessageToast.show("Producto eliminado correctamente");
+                            oTable.removeSelections(true);
+                        }).catch(function (oError) {
+                            MessageBox.error("Error al eliminar: " + oError.message);
+                        });
+                    }
+                }
+            });
         }
 
     });

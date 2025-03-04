@@ -34,4 +34,16 @@ module.exports = cds.service.impl(async function () {
             req.error(500, "Error updating product: " + err.message);
         }
     });
+
+    this.on('DeleteProduct', async (req) => {
+        const {
+            p_id
+        } = req.data;
+        try {
+            await db.run(`CALL DeleteProduct(?)`, [p_id]);
+            return "Product deleted successfully";
+        } catch (err) {
+            req.error(500, "Error deleting product: " + err.message);
+        }
+    });
 });
