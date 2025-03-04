@@ -23,4 +23,9 @@ service CatalogService {
 
     entity interactions_Products as projection on interactions.Products;
 
+
+    //SP
+    function InsertProduct(p_name : String, p_price : Decimal(10, 2), p_currency : String) returns String;
+
+
 }
