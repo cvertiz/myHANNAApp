@@ -92,6 +92,13 @@
                     <Column>
                         <Text text="Price" />
                     </Column>
+                    <Column>
+                        <Text text="Edit" />
+                    </Column>
+
+                    <Column>
+                        <Text text="Delete" />
+                    </Column>
                 </columns>
 
                 <items>
@@ -104,6 +111,16 @@
                                 number="{price}"
                                 unit="{currency}"
                             />
+                            <Button
+                                icon="sap-icon://edit"
+                                press="onEditItem"
+                                type="Transparent"
+                            />
+                            <Button
+                                icon="sap-icon://delete"
+                                press="onDeleteItem"
+                                type="Negative"
+                            />
                         </cells>
                     </ColumnListItem>
                 </items>
@@ -112,8 +129,8 @@
     </f:DynamicPage>
 
     <Dialog
-        id="addProductDialog"
-        title="Add Product"
+        id="productDialog"
+        title="Product Details"
         class="sapUiResponsivePadding"
     >
         <content>
@@ -140,6 +157,7 @@
         </content>
         <beginButton>
             <Button
+                id="saveButton"
                 text="Save"
                 type="Emphasized"
                 press="onSaveProduct"

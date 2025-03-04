@@ -26,6 +26,7 @@ service CatalogService {
 
     //SP
     function InsertProduct(p_name : String, p_price : Decimal(10, 2), p_currency : String) returns String;
+    function UpdateProduct(p_id : UUID, p_name : String, p_price : Decimal(10, 2), p_currency : String) returns String;
 
 
 }

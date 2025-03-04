@@ -17,4 +17,21 @@ module.exports = cds.service.impl(async function () {
             req.error(500, "Error inserting product: " + err.message);
         }
     });
+
+    this.on('UpdateProduct', async (req) => {
+        const {
+            p_id,
+            p_name,
+            p_price,
+            p_currency
+        } = req.data;
+        try {
+            await db.run(
+                `CALL UpdateProduct(?, ?, ?, ?)`, [p_id, p_name, p_price, p_currency]
+            );
+            return "Product updated successfully";
+        } catch (err) {
+            req.error(500, "Error updating product: " + err.message);
+        }
+    });
 });

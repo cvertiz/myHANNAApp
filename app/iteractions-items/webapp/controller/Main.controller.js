@@ -47,58 +47,87 @@ sap.ui.define([
         },
 
         onAddItem: function () {
-                if (!this._oDialog) {
-                    this._oDialog = this.getView().byId("addProductDialog");
-                }
-                this._oDialog.open();
-            },
+            if (!this._oDialog) {
+                this._oDialog = this.getView().byId("addProductDialog");
+            }
+            this._oDialog.open();
+        },
+        onSaveProduct: function () {
+            var oModel = this.getView().getModel(); // Modelo OData V4
 
-            onCloseDialog: function () {
-                this._oDialog.close();
-            },
+            var sName = this.getView().byId("inputName").getValue();
+            var fPrice = parseFloat(this.getView().byId("inputPrice").getValue());
+            var sCurrency = this.getView().byId("inputCurrency").getValue();
 
-            onSaveProduct: function () {
-                var oModel = this.getView().getModel();
-                console.log(oModel); // Verifica qué tipo de modelo tienes
+            if (!sName || isNaN(fPrice) || !sCurrency) {
+                MessageBox.error("Todos los campos son obligatorios.");
+                return;
+            }
 
+            var that = this;
 
-                // Obtener valores ingresados por el usuario
-                var sName = this.getView().byId("inputName").getValue();
-                var fPrice = parseFloat(this.getView().byId("inputPrice").getValue());
-                var sCurrency = this.getView().byId("inputCurrency").getValue();
+            if (this._sProductId) {
+                // EDITAR PRODUCTO: Llamar al procedimiento `UpdateProduct`
+                var oContext = oModel.bindContext("/UpdateProduct(...)");
 
-                console.log("sname: "+ sName);
-                console.log("fPrice: " + fPrice);
-                console.log("sCurrency: " + sCurrency);
-
-                // Validar que los campos no estén vacíos
-                if (!sName || isNaN(fPrice) || !sCurrency) {
-                    sap.m.MessageBox.error("Please enter valid values for all fields.");
-                    return;
-                }
-
-                // Crear el contexto para llamar al procedimiento almacenado
-                var oContext = oModel.bindContext("/InsertProduct(...)");
-
-                // Asignar parámetros al procedimiento almacenado
+                oContext.setParameter("p_id", this._sProductId);
                 oContext.setParameter("p_name", sName);
                 oContext.setParameter("p_price", fPrice);
                 oContext.setParameter("p_currency", sCurrency);
 
-                console.log(oContext)
-
-                // Ejecutar el procedimiento almacenado
                 oContext.execute().then(function () {
-                    sap.m.MessageToast.show("Producto agregado correctamente");
-                    oModel.refresh(); // Actualiza la tabla después de insertar
+                    MessageToast.show("Producto actualizado correctamente");
+                    oModel.refresh();
+                    that._sProductId = null; // Resetear ID
+                    that.getView().byId("productDialog").close();
                 }).catch(function (oError) {
-                    sap.m.MessageBox.error("Error al agregar producto: " + oError.message);
+                    MessageBox.error("Error al actualizar: " + oError.message);
                 });
 
-                // Cerrar el diálogo después de guardar
-                this.onCloseDialog();
+            } else {
+                // AGREGAR PRODUCTO: Llamar al procedimiento `InsertProduct`
+                var oContext = oModel.bindContext("/InsertProduct(...)");
+
+                oContext.setParameter("p_name", sName);
+                oContext.setParameter("p_price", fPrice);
+                oContext.setParameter("p_currency", sCurrency);
+
+                oContext.execute().then(function () {
+                    MessageToast.show("Producto agregado correctamente");
+                    oModel.refresh();
+                    that.getView().byId("productDialog").close();
+                }).catch(function (oError) {
+                    MessageBox.error("Error al agregar: " + oError.message);
+                });
+            }
+        },
+        onEditItem: function (oEvent) {
+            var oItem = oEvent.getSource().getParent(); // Obtiene el item seleccionado
+            var oContext = oItem.getBindingContext(); // Obtiene el contexto del modelo
+
+            if (!oContext) {
+                MessageBox.error("No se pudo obtener los datos del producto.");
+                return;
             }
 
+            // Guardar el ID del producto a editar
+            this._sProductId = oContext.getProperty("ID");
+
+            // Llenar el formulario con los datos existentes
+            this.getView().byId("inputName").setValue(oContext.getProperty("name"));
+            this.getView().byId("inputPrice").setValue(oContext.getProperty("price"));
+            this.getView().byId("inputCurrency").setValue(oContext.getProperty("currency"));
+
+            // Cambiar el texto del botón para diferenciar entre "Add" y "Edit"
+            this.getView().byId("saveButton").setText("Update");
+
+            // Abrir el popup
+            this.getView().byId("productDialog").open();
+        },
+        onCloseDialog: function () {
+            this.getView().byId("productDialog").close();
+            this._sProductId = null; // Resetear ID para la próxima vez
+        }
 
     });
 });
