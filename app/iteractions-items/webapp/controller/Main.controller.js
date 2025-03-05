@@ -129,7 +129,7 @@ sap.ui.define([
             // Llenar el formulario con los datos existentes
             this.getView().byId("inputName").setValue(oContext.getProperty("name"));
             this.getView().byId("inputPrice").setValue(oContext.getProperty("price"));
-            this.getView().byId("inputCurrency").setValue(oContext.getProperty("currency"));
+            this.getView().byId("inputCurrency").setValue(oContext.getProperty("currency_code"));
 
             // Cambiar el texto del botón para diferenciar entre "Add" y "Edit"
             this.getView().byId("saveButton").setText("Update");

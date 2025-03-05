@@ -104,7 +104,7 @@
                             <Text text="{created_at}" />
                             <ObjectNumber
                                 number="{price}"
-                                unit="{currency}"
+                                unit="{currency_code}"
                             />
                             <Button
                                 icon="sap-icon://edit"
