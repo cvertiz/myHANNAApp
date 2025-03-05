@@ -171,7 +171,7 @@ sap.ui.define([
                     if (oAction === sap.m.MessageBox.Action.OK) {
                         oContext.execute().then(function () {
                             MessageToast.show("Producto eliminado correctamente");
-                            oBindingContext.refresh()
+                            oTable.getBinding("items").refresh();
                             oTable.removeSelections(true);
                         }).catch(function (oError) {
                             MessageBox.error("Error al eliminar: " + oError.message);
