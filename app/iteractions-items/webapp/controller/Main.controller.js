@@ -13,12 +13,21 @@ sap.ui.define([
 
         _loadViewModel: function () {
             var oModel = this.getOwnerComponent().getModel();
-            console.log(oModel);
-            this.getView().setModel(oModel);
+            this.getView().setModel(oModel); // Asegurar que la vista tenga el modelo
+
+            // Obtener el binding de la tabla
+            var oTable = this.getView().byId("itemsTable");
+            var oBinding = oTable.getBinding("items");
+
+            // Aplicar filtro: solo productos con status = 1
+            var oFilter = new sap.ui.model.Filter("status", sap.ui.model.FilterOperator.EQ, 1);
+            oBinding.filter([oFilter]);
         },
+
         onInit: function () {
             this._loadViewModel();
         },
+
         onSearch: function (oEvent) {
             var sQuery = oEvent.getParameter("newValue"); // Obtiene el valor ingresado
             var oTable = this.getView().byId("itemsTable"); // Referencia a la tabla
