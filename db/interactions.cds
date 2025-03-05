@@ -32,6 +32,6 @@ entity Products : cuid, managed {
     name       : String(255);
     created_at : DateTime;
     price      : Decimal(10, 2);
-    currency   : String(3);
+    currency   : Currency;
     status: Integer default 1;
 }
