@@ -24,20 +24,12 @@ modules:
         properties:
           srv-url: ${default-url}
     requires:
-      - name: MyHANAApp-db
       - name: MyHANAApp-auth
-
-  - name: MyHANAApp-db-deployer
-    type: hdb
-    path: gen/db
-    parameters:
-      buildpack: nodejs_buildpack
-    requires:
       - name: MyHANAApp-db
 
   - name: MyHANAApp
     type: approuter.nodejs
-    path: app\router
+    path: app\
     parameters:
       keep-existing-routes: true
       disk-quota: 256M
@@ -56,12 +48,15 @@ modules:
           app-protocol: ${protocol}
           app-uri: ${default-uri}
 
-resources:
-  - name: MyHANAApp-db
-    type: com.sap.xs.hdi-container
+  - name: MyHANAApp-db-deployer
+    type: hdb
+    path: gen/db
     parameters:
-      service: hana
-      service-plan: hdi-shared
+      buildpack: nodejs_buildpack
+    requires:
+      - name: MyHANAApp-db
+
+resources:
   - name: MyHANAApp-auth
     type: org.cloudfoundry.managed-service
     parameters:
@@ -71,3 +66,8 @@ resources:
       config:
         xsappname: MyHANAApp-${org}-${space}
         tenant-mode: dedicated
+  - name: MyHANAApp-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
