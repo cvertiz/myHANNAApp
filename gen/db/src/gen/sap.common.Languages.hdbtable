@@ -1,6 +1,0 @@
-COLUMN TABLE sap_common_Languages (
-  name NVARCHAR(255),
-  descr NVARCHAR(1000),
-  code NVARCHAR(14) NOT NULL,
-  PRIMARY KEY(code)
-)

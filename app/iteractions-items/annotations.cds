@@ -1,1 +1,0 @@
-using CatalogService as service from '../../srv/interacion_srv';
